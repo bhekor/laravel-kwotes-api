@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\KwoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group([
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers\Api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::get('profile', [AuthController::class, 'profile']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+});
 
-// Route::get('kwotes/{id?}', [KwotesController::class, 'index']);
-// Route::post('kwotes/add', [KwotesController::class, 'store']);
-// Route::put('kwotes/update/{id}', [KwotesController::class, 'update']);
-// Route::delete('kwotes/delete/{id}', [KwotesController::class, 'destroy']);
-// Route::get('kwotes/search/{quote}', [KwotesController::class, 'search']);
 
 Route::prefix('v1')->group(function ()
 {

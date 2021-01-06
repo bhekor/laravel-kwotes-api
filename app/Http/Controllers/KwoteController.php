@@ -6,9 +6,21 @@ use App\Http\Resources\Kwote as KwoteResource;
 use App\Http\Resources\KwoteCollection;
 use App\Models\Kwote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KwoteController extends Controller
-{
+{    
+    protected $user;
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->user = $this->guard()->user();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -103,5 +115,12 @@ class KwoteController extends Controller
                 'message' => 'Kwote Deleted Successfully!',
             ];
         }
+         
+        return response()->json(['message' => 'Something went wrong!'], 400);
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
     }
 }

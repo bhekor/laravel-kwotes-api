@@ -11,6 +11,8 @@
 
 This API created using the Laravel framework API Resource that introduced in version 5.5.
 
+**API Protection:** JWT Authentication
+
 ### To use
 
 Setup your database in the `.env` file
@@ -23,7 +25,20 @@ Setup your database in the `.env` file
 >> php artisan db:seed
 ```
 
-### The Endpoints
+### Installing the JWT Auth package
+
+```php
+# Installing the JWT Auth package
+>> composer require tymon/jwt-auth:dev-develop --prefer-source
+
+# Publishing the asseta
+>> php artisan vendor:publish Tymon\JWTAuth\Providers\LaravelServiceProvider
+
+# Generating your secret key (.env)
+>> php artisan jwt:secret
+```
+
+### The Endpoints (API)
 
 ```php
 # to get all kwotes (GET, POST, PUT/PATCH)
@@ -31,6 +46,21 @@ Setup your database in the `.env` file
 
 # to get single kwote (GET)
 /api/v1/kwotes/{id}
+```
+
+### The Endpoints (AUTH)
+
+```php
+# endpoints for the jwt authentication
+/api/auth/login # POST
+
+/api/auth/register # POST
+
+/api/auth/profile # GET
+
+/api/auth/logout # POST
+
+/api/auth/refresh # POST
 ```
 
 ## Contributing
