@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Kwote as ResourcesKwote;
+use App\Http\Resources\Kwote as KwoteResource;
+use App\Http\Resources\KwoteCollection;
 use App\Models\Kwote;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,8 @@ class KwoteController extends Controller
      */
     public function index()
     {
-        $kwotes = Kwote::paginate(5);
-
-        return ResourcesKwote::collection($kwotes);
+        // return KwoteResource::collection(Kwote::paginate(5));
+        return new KwoteCollection(Kwote::paginate(5));
     }
 
     /**
@@ -28,7 +28,7 @@ class KwoteController extends Controller
      */
     public function show(Kwote $kwote)
     {
-        return new ResourcesKwote($kwote);
+        return new KwoteResource($kwote);
     }
 
     /**

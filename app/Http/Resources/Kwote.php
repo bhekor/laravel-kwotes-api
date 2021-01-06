@@ -6,6 +6,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Kwote extends JsonResource
 {
+    // Using a custom key instead of 'data'
+    public static $wrap = 'kwote';
+
     /**
      * Transform the resource into an array.
      *

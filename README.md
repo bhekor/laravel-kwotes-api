@@ -7,13 +7,31 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Kwotes
 
-````
+This API created using the Laravel framework API Resource that introduced in version 5.5.
 
-```javascript
->>
-````
+### To use
+
+Setup your database in the `.env` file
+
+```php
+# migrate your tables
+>> php artisan migrate
+
+# some default data
+>> php artisan db:seed
+```
+
+### The Endpoints
+
+```php
+# to get all kwotes (GET, POST, PUT/PATCH)
+/api/v1/kwotes/
+
+# to get single kwote (GET)
+/api/v1/kwotes/{id}
+```
 
 ## Contributing
 
