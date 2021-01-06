@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
-Route::get('/all', [PagesController::class, 'all'])->name('all');
 
 
 
